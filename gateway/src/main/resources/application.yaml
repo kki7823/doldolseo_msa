@@ -1,0 +1,47 @@
+server:
+  port: 9000
+  ssl:
+    key-store: classpath:key/doldolseo_cert_key.p12
+    key-store-type: pkcs12
+    key-store-password: kyeongil7823!
+    key-password: kyeongil7823!
+    key-alias: doldolseo
+---
+spring:
+  application:
+    name: doldolseo_msa_gw
+  cloud:
+    gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: Spring Cloud Gateway GlobalFilter
+            preLogger: true
+            postLogger: true
+      discovery:
+        locator:
+          enabled: false
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - http://localhost
+              - http://localhost:3000
+              - https://doldolseo.com
+              - https://doldolseo.com:62384
+              - https://doldolseo.com:62390
+            allowedHeaders:
+              - x-requested-with
+              - authorization
+              - content-type
+              - credential
+              - X-AUTH-TOKEN
+              - X-CSRF-TOKEN
+              - Set-Cookie
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allow-credentials: true

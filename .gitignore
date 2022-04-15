@@ -1,0 +1,8 @@
+# Project exclude paths
+/.gradle/
+/area_service/build/
+/area_service/build/classes/java/main/
+/common/build/
+/common/build/classes/java/main/
+/gateway/build/
+/gateway/build/classes/java/main/

@@ -1,0 +1,5 @@
+rootProject.name = 'doldolseo_msa'
+include 'gateway'
+include 'common'
+include 'area_service'
+
