@@ -1,5 +1,10 @@
-rootProject.name = 'doldolseo_msa'
+rootProject.name = 'doldolseo_msa_multi'
 include 'gateway'
 include 'common'
-include 'area_service'
+include 'api-area'
+include 'api-review'
+include 'api-member'
+include 'api-crew'
+include 'api-crew'
+include 'api-crew-post'
 

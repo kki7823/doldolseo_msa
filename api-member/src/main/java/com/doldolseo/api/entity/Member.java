@@ -1,0 +1,40 @@
+package com.doldolseo.api.entity;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+@Entity
+@Table(name = "MEMBER_TBL")
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Member {
+    @Id
+    private String id;
+
+    private String password;
+    private String name;
+    private String nickname;
+
+    @Column(name = "MEMBER_IMG")
+    private String memberImg;
+
+    private Date birth;
+    private String gender;
+    private String email;
+    private String phone;
+
+    @Column(name = "JOIN_DATE")
+    private LocalDateTime joinDate;
+
+    @Column(name = "MEMBER_ROLE")
+    private String memberRole;
+}

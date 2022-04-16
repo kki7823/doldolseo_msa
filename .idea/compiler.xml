@@ -9,9 +9,13 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.22/9c08ea24c6eb714e2d6170e8122c069a0ba9aacf/lombok-1.18.22.jar" />
         </processorPath>
-        <module name="doldolseo_msa.common.main" />
-        <module name="doldolseo_msa.gateway.main" />
-        <module name="doldolseo_msa.area_service.main" />
+        <module name="doldolseo_msa_multi.api-area.main" />
+        <module name="doldolseo_msa_multi.api-member.main" />
+        <module name="doldolseo_msa_multi.api-crew.main" />
+        <module name="doldolseo_msa_multi.api-crew-post.main" />
+        <module name="doldolseo_msa_multi.api-review.main" />
+        <module name="doldolseo_msa_multi.common.main" />
+        <module name="doldolseo_msa_multi.gateway.main" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8" />

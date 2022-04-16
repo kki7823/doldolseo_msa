@@ -27,22 +27,29 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'mysql:mysql-connector-java'
         compileOnly 'org.projectlombok:lombok:1.18.22'
         annotationProcessor 'org.projectlombok:lombok:1.18.22'
         implementation 'org.modelmapper:modelmapper:2.4.4'
-        implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
         implementation 'commons-io:commons-io:2.11.0'
     }
 
     jar { enabled = true }
 }
 
+project(':common') {
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation group: 'org.springframework.data', name: 'spring-data-commons', version: '2.6.2'
+        implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    }
+}
+
 project(':gateway') {
     dependencies {
+        implementation project(':common')
         implementation 'org.springframework.boot:spring-boot-starter-webflux'
         implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+        implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     }
 
     ext {
@@ -56,10 +63,53 @@ project(':gateway') {
     }
 }
 
-project(':area_service') {
+project(':api-area') {
     dependencies {
+        implementation project(':common')
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-        implementation 'mysql:mysql-connector-java'
+        runtimeOnly 'mysql:mysql-connector-java'
+    }
+}
+
+project(':api-review') {
+    dependencies {
+        implementation project(':common')
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'mysql:mysql-connector-java'
+    }
+}
+
+project(':api-member') {
+    dependencies {
+        implementation project(':common')
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'mysql:mysql-connector-java'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    }
+}
+
+project(':api-crew') {
+    dependencies {
+        implementation project(':common')
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'mysql:mysql-connector-java'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    }
+}
+
+project(':api-crew-post') {
+    dependencies {
+        implementation project(':common')
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'mysql:mysql-connector-java'
+        implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     }
 }

@@ -12,6 +12,7 @@ public class PagingUtil {
         this.pageNumber = page.getPageable().getPageNumber();
         this.totalPages = page.getTotalPages();
         this.startBlockPage = ((pageNumber) / pageBlock) * pageBlock + 1;
-        this.endBlockPage = (pageNumber / pageBlock == totalPages / pageBlock) ? totalPages : startBlockPage + pageBlock - 1; //현재페이지가 마지막 블록이면 마지막페이지 = 전체 페이지 수
+        this.endBlockPage = (pageNumber / pageBlock == totalPages / pageBlock) ?
+                totalPages : startBlockPage + pageBlock - 1; //현재페이지가 마지막 블록이면 마지막페이지 = 전체 페이지 수
     }
 }

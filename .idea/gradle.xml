@@ -9,7 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/area_service" />
+            <option value="$PROJECT_DIR$/api-area" />
+            <option value="$PROJECT_DIR$/api-crew" />
+            <option value="$PROJECT_DIR$/api-crew-post" />
+            <option value="$PROJECT_DIR$/api-member" />
+            <option value="$PROJECT_DIR$/api-review" />
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/gateway" />
           </set>
