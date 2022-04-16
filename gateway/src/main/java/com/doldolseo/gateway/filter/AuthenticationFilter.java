@@ -1,7 +1,7 @@
 package com.doldolseo.gateway.filter;
 
 import com.doldolseo.gateway.route.RouterValidator;
-import com.doldolseo.utils.JwtUtil;
+import com.doldolseo.common.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;

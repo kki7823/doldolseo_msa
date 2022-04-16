@@ -2,7 +2,7 @@ package com.doldolseo.gateway;
 
 import com.doldolseo.gateway.filter.AuthenticationFilter;
 import com.doldolseo.gateway.filter.TestFilter;
-import com.doldolseo.utils.JwtUtil;
+import com.doldolseo.common.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;

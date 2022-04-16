@@ -4,7 +4,7 @@ import com.doldolseo.api.dto.ReviewDTO;
 import com.doldolseo.api.dto.ReviewPageDTO;
 import com.doldolseo.api.service.ReviewService;
 import com.doldolseo.api.util.UploadReviewFileUtil;
-import com.doldolseo.utils.PagingUtil;
+import com.doldolseo.common.PagingUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.doldolseo.api.util;
 
-import com.doldolseo.utils.UploadFileUtil;
+import com.doldolseo.common.UploadFileUtil;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Path;

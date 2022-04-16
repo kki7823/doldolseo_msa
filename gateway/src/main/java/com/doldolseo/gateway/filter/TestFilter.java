@@ -1,6 +1,6 @@
 package com.doldolseo.gateway.filter;
 
-import com.doldolseo.utils.JwtUtil;
+import com.doldolseo.common.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

@@ -1,7 +1,7 @@
 package com.doldolseo.api.configuration;
 
 import com.doldolseo.api.utils.UploadProfileUtil;
-import com.doldolseo.utils.JwtUtil;
+import com.doldolseo.common.JwtUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

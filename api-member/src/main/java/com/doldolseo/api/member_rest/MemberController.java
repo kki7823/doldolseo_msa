@@ -3,7 +3,7 @@ package com.doldolseo.api.member_rest;
 import com.doldolseo.api.dto.MemberDTO;
 import com.doldolseo.api.dto.MemberLoginDTO;
 import com.doldolseo.api.utils.UploadProfileUtil;
-import com.doldolseo.utils.JwtUtil;
+import com.doldolseo.common.JwtUtil;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

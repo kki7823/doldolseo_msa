@@ -2,7 +2,7 @@ package com.doldolseo.api;
 
 import com.doldolseo.api.dto.AreaDTO;
 import com.doldolseo.api.dto.AreaPageDTO;
-import com.doldolseo.utils.PagingUtil;
+import com.doldolseo.common.PagingUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
