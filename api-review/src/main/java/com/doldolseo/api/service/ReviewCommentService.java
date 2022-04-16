@@ -1,10 +1,11 @@
-package com.doldolseo.api.review_comment_rest;
+package com.doldolseo.api.service;
 
 import com.doldolseo.api.dto.ReviewCommentDTO;
 import com.doldolseo.api.dto.ReviewCommentsDTO;
 import com.doldolseo.api.entity.Review;
 import com.doldolseo.api.entity.ReviewComment;
-import com.doldolseo.api.review_rest.ReviewRepository;
+import com.doldolseo.api.repository.ReviewCommentRepository;
+import com.doldolseo.api.repository.ReviewRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;

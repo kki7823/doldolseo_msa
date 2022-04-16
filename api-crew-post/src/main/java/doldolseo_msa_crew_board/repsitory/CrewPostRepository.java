@@ -1,4 +1,4 @@
-package doldolseo_msa_crew_board.repository;
+package doldolseo_msa_crew_board.repsitory;
 
 import doldolseo_msa_crew_board.entity.CrewPost;
 import org.springframework.data.domain.Page;

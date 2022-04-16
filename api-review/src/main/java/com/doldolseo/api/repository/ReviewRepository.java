@@ -1,4 +1,4 @@
-package com.doldolseo.api.review_rest;
+package com.doldolseo.api.repository;
 
 import com.doldolseo.api.entity.Review;
 import org.springframework.data.domain.Page;

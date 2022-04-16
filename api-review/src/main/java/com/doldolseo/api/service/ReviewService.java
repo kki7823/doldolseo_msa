@@ -1,8 +1,8 @@
-package com.doldolseo.api.review_rest;
+package com.doldolseo.api.service;
 
 import com.doldolseo.api.dto.ReviewDTO;
 import com.doldolseo.api.entity.Review;
-import com.doldolseo.api.review_rest.ReviewRepository;
+import com.doldolseo.api.repository.ReviewRepository;
 import com.doldolseo.api.util.UploadReviewFileUtil;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;

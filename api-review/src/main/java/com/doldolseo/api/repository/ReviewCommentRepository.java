@@ -1,4 +1,4 @@
-package com.doldolseo.api.review_comment_rest;
+package com.doldolseo.api.repository;
 
 import com.doldolseo.api.entity.ReviewComment;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,7 +1,8 @@
-package com.doldolseo.api.review_comment_rest;
+package com.doldolseo.api.controller;
 
 import com.doldolseo.api.dto.ReviewCommentDTO;
 import com.doldolseo.api.dto.ReviewCommentsDTO;
+import com.doldolseo.api.service.ReviewCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.doldolseo.api.area_rest;
+package com.doldolseo.api;
 
 import com.doldolseo.api.entity.Area;
 import org.springframework.data.domain.Page;

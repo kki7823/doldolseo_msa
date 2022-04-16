@@ -1,7 +1,8 @@
-package com.doldolseo.api.review_rest;
+package com.doldolseo.api.controller;
 
 import com.doldolseo.api.dto.ReviewDTO;
 import com.doldolseo.api.dto.ReviewPageDTO;
+import com.doldolseo.api.service.ReviewService;
 import com.doldolseo.api.util.UploadReviewFileUtil;
 import com.doldolseo.utils.PagingUtil;
 import org.apache.commons.io.IOUtils;
