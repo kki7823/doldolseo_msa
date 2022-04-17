@@ -1,14 +1,12 @@
 package com.doldolseo.api.controller;
 
-import com.doldolseo.api.dto.ReviewDTO;
-import com.doldolseo.api.dto.ReviewPageDTO;
+import com.doldolseo.api.dto.ReviewRequest;
+import com.doldolseo.api.dto.ReviewListResponse;
 import com.doldolseo.api.service.ReviewService;
 import com.doldolseo.api.util.UploadReviewFileUtil;
-import com.doldolseo.common.PagingUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -17,16 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-/*
- * 후기게시판 Controller
- *
- * @Author 김경일
- * @Date 2021/08/06
- */
 
 @RestController
 public class ReviewController {
@@ -36,36 +28,20 @@ public class ReviewController {
     UploadReviewFileUtil fileUtil;
 
     @GetMapping("/review")
-    public ResponseEntity<ReviewPageDTO> getReviewList(@RequestParam(name = "areaNo", required = false) Integer areaNo,
-                                                       @PageableDefault(size = 30, sort = "wDate", direction = Sort.Direction.DESC) Pageable pageable) throws Exception {
-        Page<ReviewDTO> reviewPage = reviewService.getReviewPage(areaNo, pageable);
-
-        PagingUtil pagingUtil = new PagingUtil(5, reviewPage);
-
-        ReviewPageDTO reviewPageDTO = new ReviewPageDTO();
-        reviewPageDTO.setReviewList(reviewPage.getContent());
-        reviewPageDTO.setEndBlockPage(pagingUtil.startBlockPage);
-        reviewPageDTO.setEndBlockPage(pagingUtil.endBlockPage);
-        reviewPageDTO.setTotalPages(pagingUtil.totalPages);
-
-        return ResponseEntity.status(HttpStatus.OK).body(reviewPageDTO);
+    public ResponseEntity<ReviewListResponse> getReviewList(@RequestParam(name = "areaNo", required = false) Integer areaNo,
+                                                            @PageableDefault(size = 30, sort = "wDate", direction = Sort.Direction.DESC) Pageable pageable) throws Exception {
+        return ResponseEntity.status(HttpStatus.OK).body(reviewService.getReviewList(areaNo, pageable));
     }
 
     @GetMapping("/review/{reviewNo}")
-    public ResponseEntity<ReviewDTO> getReview(@PathVariable Long reviewNo,
-                                               @RequestParam String mode) throws Exception {
-        ReviewDTO reviewDTO;
-        if (mode.equals("write"))
-            reviewDTO = reviewService.getReviewAndHit(reviewNo);
-        else
-            reviewDTO = reviewService.getReview(reviewNo);
-
-        return ResponseEntity.status(HttpStatus.OK).body(reviewDTO);
+    public ResponseEntity<ReviewRequest> getReview(@PathVariable Long reviewNo,
+                                                   @RequestParam String mode) {
+        return ResponseEntity.status(HttpStatus.OK).body(reviewService.getReview(reviewNo, mode));
     }
 
     @PostMapping(value = "/review")
     @ResponseBody
-    public ResponseEntity<Long> insertReview(ReviewDTO dto) {
+    public ResponseEntity<Long> insertReview(ReviewRequest dto) {
         reviewService.insertReview(dto);
         return ResponseEntity.status(HttpStatus.OK).body(dto.getReviewNo());
     }
@@ -78,7 +54,7 @@ public class ReviewController {
 
     @PutMapping(value = "/review/{reviewNo}")
     public ResponseEntity<String> updateReview(@PathVariable("reviewNo") Long reviewNo,
-                                               ReviewDTO dto,
+                                               ReviewRequest dto,
                                                @RequestHeader String userId) {
         if (reviewService.updateReview(reviewNo, dto, userId))
             return ResponseEntity.status(HttpStatus.OK).body(reviewNo + "번 게시글 수정 완료");

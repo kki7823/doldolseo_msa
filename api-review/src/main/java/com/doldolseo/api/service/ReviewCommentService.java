@@ -1,7 +1,8 @@
 package com.doldolseo.api.service;
 
-import com.doldolseo.api.dto.ReviewCommentDTO;
-import com.doldolseo.api.dto.ReviewCommentsDTO;
+import com.doldolseo.api.dto.ReviewCommentRequest;
+import com.doldolseo.api.dto.ReviewCommentResponse;
+import com.doldolseo.api.dto.ReviewCommentsResponse;
 import com.doldolseo.api.entity.Review;
 import com.doldolseo.api.entity.ReviewComment;
 import com.doldolseo.api.repository.ReviewCommentRepository;
@@ -24,24 +25,19 @@ public class ReviewCommentService {
     @Autowired
     ModelMapper modelMapper;
 
-    public ReviewCommentDTO insertComment(ReviewCommentDTO dto) {
-        setWDate(dto);
-        setReview(dto);
-        ReviewComment comment = reviewCommentRepository.save(dtoToEntity(dto));
-        return entityToDto(comment);
+    public void insertComment(ReviewCommentRequest request) {
+        request.setWDate(LocalDateTime.now());
+        setReview(request);
+        ReviewComment comment = reviewCommentRepository.save(dtoToEntity(request));
     }
 
-    public void setWDate(ReviewCommentDTO dto) {
-        dto.setWDate(LocalDateTime.now());
-    }
-
-    public void setReview(ReviewCommentDTO dto) {
+    public void setReview(ReviewCommentRequest dto) {
         Review review = reviewRepository.findByReviewNo(dto.getReview().getReviewNo());
         dto.setReview(review);
     }
 
-    public ReviewCommentsDTO getComments(Long reviewNo) {
-        ReviewCommentsDTO commentsDTO = new ReviewCommentsDTO();
+    public ReviewCommentsResponse getComments(Long reviewNo) {
+        ReviewCommentsResponse commentsDTO = new ReviewCommentsResponse();
 
         List<ReviewComment> commentEntity = reviewCommentRepository.findAllByReview_ReviewNo(reviewNo);
         commentsDTO.setComments(entityListToDtoList(commentEntity));
@@ -53,7 +49,7 @@ public class ReviewCommentService {
     }
 
     @Transactional
-    public boolean updateComment(Long commentNo, ReviewCommentDTO dto, String idTryToUpdate) {
+    public boolean updateComment(Long commentNo, ReviewCommentRequest request, String idTryToUpdate) {
         String writerId = reviewCommentRepository.findByCommentNo(commentNo).getId();
 
         if (!writerId.equals(idTryToUpdate)) {
@@ -63,7 +59,7 @@ public class ReviewCommentService {
 
         ReviewComment comment = reviewCommentRepository.findByCommentNo(commentNo);
         comment.setWDate(LocalDateTime.now());
-        comment.setContent(dto.getContent());
+        comment.setContent(request.getContent());
         return true;
     }
 
@@ -79,16 +75,16 @@ public class ReviewCommentService {
         return true;
     }
 
-    public ReviewComment dtoToEntity(ReviewCommentDTO dto) {
+    public ReviewComment dtoToEntity(ReviewCommentRequest dto) {
         return modelMapper.map(dto, ReviewComment.class);
     }
 
-    public ReviewCommentDTO entityToDto(ReviewComment comment) {
-        return modelMapper.map(comment, ReviewCommentDTO.class);
+    public ReviewCommentResponse entityToDto(ReviewComment comment) {
+        return modelMapper.map(comment, ReviewCommentResponse.class);
     }
 
-    public List<ReviewCommentDTO> entityListToDtoList(List<ReviewComment> commentList) {
-        return modelMapper.map(commentList, new TypeToken<List<ReviewCommentDTO>>() {
+    public List<ReviewCommentResponse> entityListToDtoList(List<ReviewComment> commentList) {
+        return modelMapper.map(commentList, new TypeToken<List<ReviewCommentResponse>>() {
         }.getType());
     }
 

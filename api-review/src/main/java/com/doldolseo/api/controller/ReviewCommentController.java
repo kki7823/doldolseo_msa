@@ -1,7 +1,8 @@
 package com.doldolseo.api.controller;
 
-import com.doldolseo.api.dto.ReviewCommentDTO;
-import com.doldolseo.api.dto.ReviewCommentsDTO;
+import com.doldolseo.api.dto.ReviewCommentRequest;
+import com.doldolseo.api.dto.ReviewCommentResponse;
+import com.doldolseo.api.dto.ReviewCommentsResponse;
 import com.doldolseo.api.service.ReviewCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +15,14 @@ public class ReviewCommentController {
     ReviewCommentService service;
 
     @GetMapping(value = "/review/{reviewNo}/comment")
-    public ResponseEntity<ReviewCommentsDTO> getReviewComment(@PathVariable("reviewNo") Long reviewNo) {
+    public ResponseEntity<ReviewCommentsResponse> getReviewComment(@PathVariable("reviewNo") Long reviewNo) {
         return ResponseEntity.ok(service.getComments(reviewNo));
     }
 
     @PostMapping("/review/{reviewNo}/comment")
     public ResponseEntity<String> insertReviewComment(@PathVariable("reviewNo") Long reviewNo,
-                                                      @RequestBody ReviewCommentDTO dto) {
-        service.insertComment(dto);
+                                                      @RequestBody ReviewCommentRequest request) {
+        service.insertComment(request);
         return ResponseEntity.ok("댓글 삽입 완료");
     }
 
@@ -39,9 +40,9 @@ public class ReviewCommentController {
     @PutMapping("/review/{reviewNo}/comment/{commentNo}")
     public ResponseEntity<String> putReviewComment(@PathVariable("reviewNo") Long reviewNo,
                                                    @PathVariable("commentNo") Long commentNo,
-                                                   @RequestBody ReviewCommentDTO dto,
+                                                   @RequestBody ReviewCommentRequest request,
                                                    @RequestHeader String userId) {
-        if (service.updateComment(commentNo, dto, userId))
+        if (service.updateComment(commentNo, request, userId))
             return ResponseEntity.ok("등록 완료");
         else
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("등록 실패 : 권한 없음");

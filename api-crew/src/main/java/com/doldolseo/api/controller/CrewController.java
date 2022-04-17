@@ -4,7 +4,6 @@ import com.doldolseo.api.dto.*;
 import com.doldolseo.api.service.CrewService;
 import com.doldolseo.api.entity.CrewMemberId;
 import com.doldolseo.api.entity.CrewWatingMemberId;
-import doldolseo_msa_crew.dto.*;
 import com.doldolseo.api.utils.AuthorityUtil;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;

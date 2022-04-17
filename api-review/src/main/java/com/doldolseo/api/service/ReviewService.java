@@ -1,9 +1,11 @@
 package com.doldolseo.api.service;
 
-import com.doldolseo.api.dto.ReviewDTO;
+import com.doldolseo.api.dto.ReviewRequest;
+import com.doldolseo.api.dto.ReviewListResponse;
 import com.doldolseo.api.entity.Review;
 import com.doldolseo.api.repository.ReviewRepository;
 import com.doldolseo.api.util.UploadReviewFileUtil;
+import com.doldolseo.common.PagingUtil;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +25,53 @@ public class ReviewService {
     @Autowired
     UploadReviewFileUtil fileUtil;
 
-    public Page<ReviewDTO> getReviewPage(Integer areaNo, Pageable pageable) {
+    public ReviewListResponse getReviewList(Integer areaNo, Pageable pageable) {
+        Page<ReviewRequest> reviewPage = getReviewPage(areaNo, pageable);
+        ReviewListResponse response = populatePage(reviewPage);
+
+        return response;
+    }
+
+    public ReviewListResponse populatePage(Page<ReviewRequest> reviewPage) {
+        PagingUtil pagingUtil = new PagingUtil(5, reviewPage);
+
+        ReviewListResponse reviewListResponse = new ReviewListResponse();
+        reviewListResponse.setReviewList(reviewPage.getContent());
+        reviewListResponse.setEndBlockPage(pagingUtil.startBlockPage);
+        reviewListResponse.setEndBlockPage(pagingUtil.endBlockPage);
+        reviewListResponse.setTotalPages(pagingUtil.totalPages);
+
+        return reviewListResponse;
+    }
+
+    public Page<ReviewRequest> getReviewPage(Integer areaNo, Pageable pageable) {
         return (areaNo == null) ? getReviewPage(pageable) : getReviewPageByArea(areaNo, pageable);
     }
 
-    public Page<ReviewDTO> getReviewPage(Pageable pageable) {
+    public Page<ReviewRequest> getReviewPage(Pageable pageable) {
         Page<Review> reviewPage = repository.findAll(pageable);
         return entityPageToDtoPage(reviewPage);
     }
 
-    public Page<ReviewDTO> getReviewPageByArea(Integer areaNo, Pageable pageable) {
+    public Page<ReviewRequest> getReviewPageByArea(Integer areaNo, Pageable pageable) {
         Page<Review> reviewPage = repository.findAllByAreaNo(areaNo, pageable);
         return entityPageToDtoPage(reviewPage);
     }
 
-    public ReviewDTO getReview(Long reviewNo) {
+    public ReviewRequest getReview(Long reviewNo, String mode) {
+        if (mode.equals("write"))
+            return getReviewAndHit(reviewNo);
+        else
+            return getReview(reviewNo);
+    }
+
+    public ReviewRequest getReview(Long reviewNo) {
         Review review = repository.findByReviewNo(reviewNo);
         return entityToDto(review);
     }
 
     @Transactional
-    public ReviewDTO getReviewAndHit(Long reviewNo) {
+    public ReviewRequest getReviewAndHit(Long reviewNo) {
         Review review = repository.findByReviewNo(reviewNo);
         increaseHit(review);
         return entityToDto(review);
@@ -54,21 +82,21 @@ public class ReviewService {
         review.setHit(review.getHit() + 1);
     }
 
-    public ReviewDTO insertReview(ReviewDTO dto) {
+    public ReviewRequest insertReview(ReviewRequest dto) {
         getDTOfilledValues(dto);
         Review review = repository.save(dtoToEntity(dto));
         return entityToDto(review);
     }
 
-    public void getDTOfilledValues(ReviewDTO dto) {
+    public void getDTOfilledValues(ReviewRequest dto) {
         dto.setHit(1);
         dto.setWDate(LocalDateTime.now());
     }
 
     @Transactional
-    public boolean updateReview(Long reviewNo, ReviewDTO dto, String idTryToUpdate) {
+    public boolean updateReview(Long reviewNo, ReviewRequest dto, String idTryToUpdate) {
         String writerId = getReview(reviewNo).getId();
-        if(!writerId.equals(idTryToUpdate)) {
+        if (!writerId.equals(idTryToUpdate)) {
             System.out.println("[Update Fail] Has no Authority ");
             return false;
         }
@@ -83,7 +111,7 @@ public class ReviewService {
     public boolean deleteReview(Long reviewNo, String idTryToDelete) {
         String writerId = getReview(reviewNo).getId();
 
-        if(!writerId.equals(idTryToDelete)) {
+        if (!writerId.equals(idTryToDelete)) {
             System.out.println("[DELETE Fail] Has no Authority ");
             return false;
         }
@@ -94,16 +122,16 @@ public class ReviewService {
         return true;
     }
 
-    public Review dtoToEntity(ReviewDTO dto) {
+    public Review dtoToEntity(ReviewRequest dto) {
         return modelMapper.map(dto, Review.class);
     }
 
-    public ReviewDTO entityToDto(Review review) {
-        return modelMapper.map(review, ReviewDTO.class);
+    public ReviewRequest entityToDto(Review review) {
+        return modelMapper.map(review, ReviewRequest.class);
     }
 
-    public Page<ReviewDTO> entityPageToDtoPage(Page<Review> reviewPage) {
-        return modelMapper.map(reviewPage, new TypeToken<Page<ReviewDTO>>() {
+    public Page<ReviewRequest> entityPageToDtoPage(Page<Review> reviewPage) {
+        return modelMapper.map(reviewPage, new TypeToken<Page<ReviewRequest>>() {
         }.getType());
     }
 }

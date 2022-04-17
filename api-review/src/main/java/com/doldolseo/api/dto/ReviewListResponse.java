@@ -9,8 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ReviewPageDTO {
-    private List<ReviewDTO> reviewList;
+public class ReviewListResponse {
+    private List<ReviewRequest> reviewList;
     private int startBlockPage;
     private int endBlockPage;
     private int totalPages;

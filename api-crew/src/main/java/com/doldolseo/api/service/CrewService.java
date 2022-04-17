@@ -4,8 +4,6 @@ import com.doldolseo.api.dto.*;
 import com.doldolseo.api.entity.*;
 import com.doldolseo.api.repository.CrewMemberReopsitory;
 import com.doldolseo.api.repository.CrewRepository;
-import doldolseo_msa_crew.entity.*;
-import doldolseo_msa_crew.dto.*;
 import com.doldolseo.api.repository.CrewWatingMemberRepository;
 import com.doldolseo.api.utils.OtherRestUtil;
 import com.doldolseo.api.utils.PagingParams;

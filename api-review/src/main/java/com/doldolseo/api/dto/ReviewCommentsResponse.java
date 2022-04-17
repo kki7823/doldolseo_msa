@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class ReviewCommentsDTO {
-    private List<ReviewCommentDTO> comments;
+public class ReviewCommentsResponse {
+    private List<ReviewCommentResponse> comments;
     private Long numOfComments;
 }
