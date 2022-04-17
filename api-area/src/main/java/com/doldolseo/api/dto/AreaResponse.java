@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class AreaDTO {
+public class AreaResponse {
     private String name;
     private String address;
     private Integer sigungu;
@@ -19,7 +19,4 @@ public class AreaDTO {
     private String image2;
     private Integer contentType;
     private Long contentId;
-
-    //추가 속성
-    private String searchKeyword;
 }
