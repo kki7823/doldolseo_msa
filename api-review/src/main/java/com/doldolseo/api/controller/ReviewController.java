@@ -29,7 +29,7 @@ public class ReviewController {
 
     @GetMapping("/review")
     public ResponseEntity<ReviewListResponse> getReviewList(@RequestParam(name = "areaNo", required = false) Integer areaNo,
-                                                            @PageableDefault(size = 30, sort = "wDate", direction = Sort.Direction.DESC) Pageable pageable) throws Exception {
+                                                            @PageableDefault(size = 30, sort = "wDate", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.status(HttpStatus.OK).body(reviewService.getReviewList(areaNo, pageable));
     }
 
@@ -48,7 +48,7 @@ public class ReviewController {
 
     @PostMapping(value = "/review/images/{imageUUID}")
     public ResponseEntity<String> insertReviewImage(@PathVariable("imageUUID") String uuid,
-                                                    @RequestParam MultipartFile imgFile) throws IOException, FileSizeLimitExceededException {
+                                                    @RequestParam MultipartFile imgFile) {
         return ResponseEntity.status(HttpStatus.OK).body(fileUtil.saveReviewImg(uuid, imgFile));
     }
 

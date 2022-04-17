@@ -7,13 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 
-/*
- * Configuration 클래스
- *
- * @Author 김경일
- * @Date 2021/08/07
- */
-
 @Configuration
 public class ReviewConfiguration {
 
