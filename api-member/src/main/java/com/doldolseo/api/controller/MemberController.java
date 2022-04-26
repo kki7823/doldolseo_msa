@@ -1,7 +1,9 @@
-package com.doldolseo.api.member_rest;
+package com.doldolseo.api.controller;
 
 import com.doldolseo.api.dto.MemberDTO;
 import com.doldolseo.api.dto.MemberLoginDTO;
+import com.doldolseo.api.service.MemberAuthService;
+import com.doldolseo.api.service.MemberService;
 import com.doldolseo.api.utils.UploadProfileUtil;
 import com.doldolseo.common.JwtUtil;
 import org.apache.commons.io.IOUtils;

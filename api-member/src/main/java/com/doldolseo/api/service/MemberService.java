@@ -1,8 +1,8 @@
-package com.doldolseo.api.member_rest;
+package com.doldolseo.api.service;
 
 import com.doldolseo.api.dto.MemberDTO;
 import com.doldolseo.api.entity.Member;
-import com.doldolseo.api.member_rest.MemberRepository;
+import com.doldolseo.api.repository.MemberRepository;
 import com.doldolseo.api.utils.RedisUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

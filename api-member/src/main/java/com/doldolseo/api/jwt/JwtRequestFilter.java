@@ -1,6 +1,6 @@
 package com.doldolseo.api.jwt;
 
-import com.doldolseo.api.member_rest.MemberAuthService;
+import com.doldolseo.api.service.MemberAuthService;
 import com.doldolseo.common.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

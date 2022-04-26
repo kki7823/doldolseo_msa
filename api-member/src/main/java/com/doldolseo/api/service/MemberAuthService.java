@@ -1,9 +1,9 @@
-package com.doldolseo.api.member_rest;
+package com.doldolseo.api.service;
 
 import com.doldolseo.api.dto.MemberDTO;
 import com.doldolseo.api.entity.Member;
 import com.doldolseo.api.jwt.MemberRole;
-import com.doldolseo.api.member_rest.MemberRepository;
+import com.doldolseo.api.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;

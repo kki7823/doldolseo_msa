@@ -1,4 +1,4 @@
-package com.doldolseo.api.member_rest;
+package com.doldolseo.api.repository;
 
 import com.doldolseo.api.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

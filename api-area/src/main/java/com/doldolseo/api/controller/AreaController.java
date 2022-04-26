@@ -23,7 +23,7 @@ public class AreaController {
     }
 
     @PostMapping(value = "/area/{name}")
-    public ResponseEntity<AreaResponse> areaDetail(@PathVariable("name") String name) {
+    public ResponseEntity<AreaResponse> areaDetail(@PathVariable("name") String name){
         return ResponseEntity.status(HttpStatus.OK).body(service.getArea(name));
     }
 
